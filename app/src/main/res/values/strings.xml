@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">MyApplycationCipher</string>
+    <string name="encrypt">Encrypt</string>
+    <string name="decrypt">Decrypt</string>
+    <string-array name="namesCyphers">
+        <item>Цезаря</item>
+        <item>Атбаш</item>
+        <item>Спарты</item>
+        <item>Виженера</item>
+    </string-array>
+</resources>
