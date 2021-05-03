@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.isDigitsOnly
 import com.example.myapplycationcipher.databinding.ActivityMainBinding
 
 
@@ -28,43 +29,123 @@ class MainActivity : AppCompatActivity() {
         bindingClass.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 Toast.makeText(this@MainActivity, "Вы выбрали шифр: ${arrayStr[position]}" , Toast.LENGTH_SHORT).show()
-                if (arrayStr[position] == "Цезаря") {
-                    // для ввода только цифр
-                    bindingClass.inputKey.inputType = InputType.TYPE_CLASS_NUMBER
-                    // делаем поле кликабельным и выдимым
-                    bindingClass.inputKey.isFocusable = true
-                    bindingClass.inputKey.isFocusableInTouchMode = true
-                    bindingClass.inputKey.isClickable = true
-                    bindingClass.inputKey.visibility = View.VISIBLE;
+                when {
+                    arrayStr[position] == "Цезаря" -> {
+                        // для ввода только цифр
+                        bindingClass.inputKey.inputType = InputType.TYPE_CLASS_NUMBER
+                        // делаем поле кликабельным и выдимым
+                        bindingClass.inputKey.isFocusable = true
+                        bindingClass.inputKey.isFocusableInTouchMode = true
+                        bindingClass.inputKey.isClickable = true
+                        bindingClass.inputKey.visibility = View.VISIBLE;
 
-                    bindingClass.encryptButton.setOnClickListener {
-                        //сразу работаю с калссом Cezar не создовая его объект
-                        bindingClass.encrDecryTV.text = Cezar().crypt(1,
-                                bindingClass.inputText.text.toString(),
-                                bindingClass.inputKey.text.toString())[0]
-                    }
+                        bindingClass.encryptButton.setOnClickListener {
+                            if (checkInTextAndInKey()) {
+                                if (bindingClass.inputKey.text.toString().isDigitsOnly() && bindingClass.inputKey.text.toString().toInt() > 0)
+                                    //сразу работаю с калссом Cezar не создовая его объект
+                                    bindingClass.encrDecryTV.text = Cezar().crypt(1,
+                                            bindingClass.inputText.text.toString(),
+                                            bindingClass.inputKey.text.toString())[0]
+                                else
+                                    Toast.makeText(this@MainActivity, "Ошибка, ключ должен быть целым положительным числом" , Toast.LENGTH_SHORT).show()
+                            }
+                            else
+                                Toast.makeText(this@MainActivity, "Ошибка, поля не должны быть пустыми" , Toast.LENGTH_SHORT).show()
 
-                    bindingClass.decryptButton.setOnClickListener {
-                        bindingClass.encrDecryTV.text = Cezar().crypt(0,
-                                bindingClass.inputText.text.toString(),
-                                bindingClass.inputKey.text.toString())[0]
-                    }
-                }
-                else if (arrayStr[position] == "Атбаш"){
-                    bindingClass.inputKey.isFocusable = false
-                    bindingClass.inputKey.isFocusableInTouchMode = false
-                    bindingClass.inputKey.isClickable = false
-                    bindingClass.inputKey.visibility = View.INVISIBLE;
+                        }
 
-                    bindingClass.encryptButton.setOnClickListener {
-                        bindingClass.encrDecryTV.text = AtBash().crypt(1,
-                                bindingClass.inputText.text.toString(),
-                                "")[0]
+                        bindingClass.decryptButton.setOnClickListener {
+                            if (checkInTextAndInKey())
+                                bindingClass.encrDecryTV.text = Cezar().crypt(0,
+                                        bindingClass.inputText.text.toString(),
+                                        bindingClass.inputKey.text.toString())[0]
+                            else
+                                Toast.makeText(this@MainActivity, "Ошибка, поля не должны быть пустыми" , Toast.LENGTH_SHORT).show()
+
+                        }
                     }
-                    bindingClass.decryptButton.setOnClickListener {
-                        bindingClass.encrDecryTV.text = AtBash().crypt(0,
-                                bindingClass.inputText.text.toString(),
-                                "")[0]
+                    arrayStr[position] == "Атбаш" -> {
+                        bindingClass.inputKey.isFocusable = false
+                        bindingClass.inputKey.isFocusableInTouchMode = false
+                        bindingClass.inputKey.isClickable = false
+                        bindingClass.inputKey.visibility = View.INVISIBLE;
+
+                        bindingClass.encryptButton.setOnClickListener {
+                            if (checkInTextAndInKey())
+                            //сразу работаю с калссом Cezar не создовая его объект
+                                bindingClass.encrDecryTV.text = AtBash().crypt(1,
+                                        bindingClass.inputText.text.toString(),
+                                        bindingClass.inputKey.text.toString())[0]
+                            else
+                                Toast.makeText(this@MainActivity, "Ошибка, поле не может быть пустыми" , Toast.LENGTH_SHORT).show()
+
+                        }
+
+                        bindingClass.decryptButton.setOnClickListener {
+                            if (checkInTextAndInKey())
+                                bindingClass.encrDecryTV.text = AtBash().crypt(0,
+                                        bindingClass.inputText.text.toString(),
+                                        bindingClass.inputKey.text.toString())[0]
+                            else
+                                Toast.makeText(this@MainActivity, "Ошибка, поле не может быть пустыми" , Toast.LENGTH_SHORT).show()
+
+                        }
+                    }
+                    arrayStr[position] == "Спарты" -> {
+                        bindingClass.inputKey.isFocusable = false
+                        bindingClass.inputKey.isFocusableInTouchMode = false
+                        bindingClass.inputKey.isClickable = false
+                        bindingClass.inputKey.visibility = View.INVISIBLE;
+
+
+                        bindingClass.encryptButton.setOnClickListener {
+                            if (checkInTextAndInKey())
+                            //сразу работаю с калссом Cezar не создовая его объект
+                                bindingClass.encrDecryTV.text = Skitalo().crypt(1,
+                                        bindingClass.inputText.text.toString(),
+                                        bindingClass.inputKey.text.toString())[0]
+                            else
+                                Toast.makeText(this@MainActivity, "Ошибка, поле не может быть пустыми" , Toast.LENGTH_SHORT).show()
+
+                        }
+
+                        bindingClass.decryptButton.setOnClickListener {
+                            if (checkInTextAndInKey())
+                                bindingClass.encrDecryTV.text = Skitalo().crypt(0,
+                                        bindingClass.inputText.text.toString(),
+                                        bindingClass.inputKey.text.toString())[0]
+                            else
+                                Toast.makeText(this@MainActivity, "Ошибка, поле не может быть пустыми" , Toast.LENGTH_SHORT).show()
+
+                        }
+                    }
+                    arrayStr[position] == "Виженера" -> {
+                        bindingClass.inputKey.inputType = InputType.TYPE_CLASS_TEXT
+                        bindingClass.inputKey.isFocusable = true
+                        bindingClass.inputKey.isFocusableInTouchMode = true
+                        bindingClass.inputKey.isClickable = true
+                        bindingClass.inputKey.visibility = View.VISIBLE;
+
+                        bindingClass.encryptButton.setOnClickListener {
+                            if (checkInTextAndInKey())
+                            //сразу работаю с калссом Cezar не создовая его объект
+                                bindingClass.encrDecryTV.text = Vijenera().crypt(1,
+                                        bindingClass.inputText.text.toString(),
+                                        bindingClass.inputKey.text.toString())[0]
+                            else
+                                Toast.makeText(this@MainActivity, "Ошибка, поля не должны быть пустыми" , Toast.LENGTH_SHORT).show()
+
+                        }
+
+                        bindingClass.decryptButton.setOnClickListener {
+                            if (checkInTextAndInKey())
+                                bindingClass.encrDecryTV.text = Vijenera().crypt(0,
+                                        bindingClass.inputText.text.toString(),
+                                        bindingClass.inputKey.text.toString())[0]
+                            else
+                                Toast.makeText(this@MainActivity, "Ошибка, поля не должны быть пустыми" , Toast.LENGTH_SHORT).show()
+
+                        }
                     }
                 }
 
@@ -88,6 +169,17 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    fun checkInTextAndInKey() : Boolean {
+        if (bindingClass.inputText.text.toString().isEmpty() && bindingClass.inputText.text.toString().isEmpty())
+            return false
+        return true
+    }
+
+    fun checkInText() : Boolean {
+        if (bindingClass.inputText.text.toString().isEmpty())
+            return false
+        return true
+    }
 
 
 
