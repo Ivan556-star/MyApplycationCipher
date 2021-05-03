@@ -1,5 +1,7 @@
 package com.example.myapplycationcipher
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log
@@ -36,12 +38,6 @@ class MainActivity : AppCompatActivity() {
                     bindingClass.inputKey.visibility = View.VISIBLE;
 
                     bindingClass.encryptButton.setOnClickListener {
-                        Log.d("CezarEncrypt",  Cezar().crypt(1,
-                                bindingClass.inputText.text.toString(),
-                                bindingClass.inputKey.text.toString())[0])
-                        Log.d("CezarEncrypt2", bindingClass.inputText.text.toString())
-                        Log.d("CezarEncrypt3", bindingClass.inputKey.text.toString())
-
                         //сразу работаю с калссом Cezar не создовая его объект
                         bindingClass.encrDecryTV.text = Cezar().crypt(1,
                                 bindingClass.inputText.text.toString(),
@@ -52,12 +48,6 @@ class MainActivity : AppCompatActivity() {
                         bindingClass.encrDecryTV.text = Cezar().crypt(0,
                                 bindingClass.inputText.text.toString(),
                                 bindingClass.inputKey.text.toString())[0]
-
-                        Log.d("CezarDecrypt",  Cezar().crypt(0,
-                                bindingClass.inputText.text.toString(),
-                                bindingClass.inputKey.text.toString())[0])
-                        Log.d("CezarDecrypt2", bindingClass.inputText.text.toString())
-                        Log.d("CezarDecrypt3", bindingClass.inputKey.text.toString())
                     }
                 }
                 else if (arrayStr[position] == "Атбаш"){
@@ -86,7 +76,14 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-
+        // для копирования текста из encrDecryTV долгим нажатием
+        bindingClass.encrDecryTV.setOnLongClickListener {
+            val clipboard = bindingClass.encrDecryTV.context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager?
+            val clip = ClipData.newPlainText("Order Number", bindingClass.encrDecryTV.text.toString())
+            clipboard?.setPrimaryClip(clip)
+            Toast.makeText(this@MainActivity, "Текст был скопирован в буфер обмена", Toast.LENGTH_SHORT).show()
+            true
+        }
 
     }
 
