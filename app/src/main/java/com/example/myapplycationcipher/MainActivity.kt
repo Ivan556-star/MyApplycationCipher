@@ -16,6 +16,8 @@ import com.example.myapplycationcipher.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bindingClass: ActivityMainBinding
+    private var backPressedTime: Long = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -295,6 +297,17 @@ class MainActivity : AppCompatActivity() {
     fun INVISIBLE(){
         bindingClass.inputKey.visibility = View.GONE
         bindingClass.pasteKey.visibility = View.GONE
+    }
+
+    // системная кнопка "Назад"
+    override fun onBackPressed() {
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            super.onBackPressed()
+            return
+        }
+        else
+            Toast.makeText(this, "Нажмите ещё раз, чтобы выйти из приложения", Toast.LENGTH_SHORT).show()
+        backPressedTime = System.currentTimeMillis()
     }
 
 }
