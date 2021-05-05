@@ -2,6 +2,7 @@ package com.example.myapplycationcipher
 
 import android.content.ClipData
 import android.content.ClipboardManager
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.text.InputType
@@ -28,6 +29,38 @@ class MainActivity : AppCompatActivity() {
         SPINER()
         // запрет на поворот экрана
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d("MainAct_Log", "onStart")
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("MainAct_Log", "onResume")
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("MainAct_Log", "onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("MainAct_Log", "onStop")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d("MainAct_Log", "onRestart")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("MainAct_Log", "onDestroy")
     }
 
 
@@ -241,37 +274,27 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    override fun onStart() {
-        super.onStart()
-        Log.d("MainAct_Log", "onStart")
+    //для передачи ответа в другие приложения
+    fun onClickShareAnswer(view: View){
+        val answer = "Текст:\n${bindingClass.encrDecryTV.text}"
+        val intent = Intent()
+        intent.action = Intent.ACTION_SEND
+        intent.putExtra(Intent.EXTRA_TEXT, answer)
+        intent.type = "text/plain"
 
+        startActivity(Intent.createChooser(intent, "Отправить в:"))
     }
 
-    override fun onResume() {
-        super.onResume()
-        Log.d("MainAct_Log", "onResume")
+    fun onClickShareKey(view: View){
+        val key = "Ключ:\n${bindingClass.TVKey.text}"
+        val intent = Intent()
+        intent.action = Intent.ACTION_SEND
+        intent.putExtra(Intent.EXTRA_TEXT, key)
+        intent.type = "text/plain"
 
+        startActivity(Intent.createChooser(intent, "Отправить в:"))
     }
 
-    override fun onPause() {
-        super.onPause()
-        Log.d("MainAct_Log", "onPause")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d("MainAct_Log", "onStop")
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        Log.d("MainAct_Log", "onRestart")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("MainAct_Log", "onDestroy")
-    }
 
 
     private fun checkInTextAndInKey() : Boolean {
