@@ -2,6 +2,7 @@ package com.example.myapplycationcipher
 
 import android.content.ClipData
 import android.content.ClipboardManager
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log
@@ -22,167 +23,220 @@ class MainActivity : AppCompatActivity() {
         setContentView(bindingClass.root)
         Log.d("MainAct_Log", "OnCreate")
 
+        SPINER()
+        // запрет на поворот экрана
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+    }
+
+
+
+
+
+    private fun SPINER(){
         // получаем массив строк из файла ресурсов
         val arrayStr = resources.getStringArray(R.array.namesCyphers)
 
         // для проверки, что выбрал пользователь в спинере
         bindingClass.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                Toast.makeText(this@MainActivity, "Вы выбрали шифр: ${arrayStr[position]}" , Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, "Вы выбрали шифр: ${arrayStr[position]}", Toast.LENGTH_SHORT).show()
                 when {
                     arrayStr[position] == "Цезаря" -> {
                         // для ввода только цифр
                         bindingClass.inputKey.inputType = InputType.TYPE_CLASS_NUMBER
-                        // делаем поле кликабельным и выдимым
-                        bindingClass.inputKey.isFocusable = true
-                        bindingClass.inputKey.isFocusableInTouchMode = true
-                        bindingClass.inputKey.isClickable = true
-                        bindingClass.inputKey.visibility = View.VISIBLE;
+                        VISIBLE()
 
                         bindingClass.encryptButton.setOnClickListener {
                             if (checkInTextAndInKey()) {
-                                if (bindingClass.inputKey.text.toString().isDigitsOnly() && bindingClass.inputKey.text.toString().toInt() > 0)
-                                    //сразу работаю с калссом Cezar не создовая его объект
-                                    bindingClass.encrDecryTV.text = Cezar().crypt(1,
-                                            bindingClass.inputText.text.toString(),
-                                            bindingClass.inputKey.text.toString())[0]
-                                else
-                                    Toast.makeText(this@MainActivity, "Ошибка, ключ должен быть целым положительным числом" , Toast.LENGTH_SHORT).show()
+
+                                try {
+                                    if (bindingClass.inputKey.text.toString().isDigitsOnly() && bindingClass.inputKey.text.toString().toInt() > 0) {
+                                        //сразу работаю с калссом Cezar не создовая его объект
+                                        val cypher = Cezar().crypt(1,
+                                                bindingClass.inputText.text.toString(),
+                                                bindingClass.inputKey.text.toString())
+                                        bindingClass.encrDecryTV.text = cypher[0]
+                                        bindingClass.TVKey.text = cypher[1]
+                                    }
+                                    else
+                                        Toast.makeText(this@MainActivity,
+                                                "Ошибка, ключ должен быть целым положительным числом",
+                                                Toast.LENGTH_SHORT).show()
+                                } catch (e: Exception){
+                                    Toast.makeText(this@MainActivity,
+                                            "Ошибка, ключ должен быть целым положительным числом",
+                                            Toast.LENGTH_SHORT).show()
+                                }
                             }
                             else
-                                Toast.makeText(this@MainActivity, "Ошибка, поля не должны быть пустыми" , Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@MainActivity,
+                                        "Ошибка, поля не должны быть пустыми",
+                                        Toast.LENGTH_SHORT).show()
 
                         }
 
                         bindingClass.decryptButton.setOnClickListener {
                             if (checkInTextAndInKey())
-                                bindingClass.encrDecryTV.text = Cezar().crypt(0,
-                                        bindingClass.inputText.text.toString(),
-                                        bindingClass.inputKey.text.toString())[0]
+                                try {
+                                    if (bindingClass.inputKey.text.toString().isDigitsOnly() && bindingClass.inputKey.text.toString().toInt() > 0) {
+                                        val cypher = Cezar().crypt(0,
+                                                bindingClass.inputText.text.toString(),
+                                                bindingClass.inputKey.text.toString())
+                                        bindingClass.encrDecryTV.text = cypher[0]
+                                        bindingClass.TVKey.text = cypher[1]
+                                    }
+                                    else
+                                        Toast.makeText(this@MainActivity,
+                                                "Ошибка, ключ должен быть целым положительным числом",
+                                                Toast.LENGTH_SHORT).show()
+                                } catch (e: Exception){
+                                    Toast.makeText(this@MainActivity,
+                                            "Ошибка, ключ должен быть целым положительным числом",
+                                            Toast.LENGTH_SHORT).show()
+                                }
                             else
-                                Toast.makeText(this@MainActivity, "Ошибка, поля не должны быть пустыми" , Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@MainActivity,
+                                        "Ошибка, поля не должны быть пустыми",
+                                        Toast.LENGTH_SHORT).show()
 
                         }
                     }
                     arrayStr[position] == "Атбаш" -> {
-                        bindingClass.inputKey.isFocusable = false
-                        bindingClass.inputKey.isFocusableInTouchMode = false
-                        bindingClass.inputKey.isClickable = false
-                        bindingClass.inputKey.visibility = View.INVISIBLE;
+                        INVISIBLE()
 
                         bindingClass.encryptButton.setOnClickListener {
-                            if (checkInTextAndInKey())
-                            //сразу работаю с калссом Cezar не создовая его объект
-                                bindingClass.encrDecryTV.text = AtBash().crypt(1,
+                            if (checkInText()){
+                                val cypher = AtBash().crypt(1,
                                         bindingClass.inputText.text.toString(),
-                                        bindingClass.inputKey.text.toString())[0]
+                                        bindingClass.inputKey.text.toString())
+                                bindingClass.encrDecryTV.text = cypher[0]
+                                bindingClass.TVKey.text = cypher[0]
+                            }
                             else
-                                Toast.makeText(this@MainActivity, "Ошибка, поле не может быть пустыми" , Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@MainActivity, "Ошибка, поле не может быть пустыми", Toast.LENGTH_SHORT).show()
 
                         }
 
                         bindingClass.decryptButton.setOnClickListener {
-                            if (checkInTextAndInKey())
-                                bindingClass.encrDecryTV.text = AtBash().crypt(0,
+                            if (checkInText()){
+                                val cypher = AtBash().crypt(0,
                                         bindingClass.inputText.text.toString(),
-                                        bindingClass.inputKey.text.toString())[0]
+                                        bindingClass.inputKey.text.toString())
+                                bindingClass.encrDecryTV.text = cypher[0]
+                                bindingClass.TVKey.text = cypher[0]
+                            }
                             else
-                                Toast.makeText(this@MainActivity, "Ошибка, поле не может быть пустыми" , Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@MainActivity, "Ошибка, поле не может быть пустыми", Toast.LENGTH_SHORT).show()
 
                         }
                     }
                     arrayStr[position] == "Спарты" -> {
-                        bindingClass.inputKey.isFocusable = false
-                        bindingClass.inputKey.isFocusableInTouchMode = false
-                        bindingClass.inputKey.isClickable = false
-                        bindingClass.inputKey.visibility = View.INVISIBLE;
-
+                        INVISIBLE()
 
                         bindingClass.encryptButton.setOnClickListener {
-                            if (checkInTextAndInKey())
-                            //сразу работаю с калссом Cezar не создовая его объект
-                                bindingClass.encrDecryTV.text = Skitalo().crypt(1,
+                            if (checkInText()){
+                                val cypher = Skitalo().crypt(1,
                                         bindingClass.inputText.text.toString(),
-                                        bindingClass.inputKey.text.toString())[0]
+                                        bindingClass.inputKey.text.toString())
+                                bindingClass.encrDecryTV.text = cypher[0]
+                                bindingClass.TVKey.text = cypher[0]
+                            }
                             else
-                                Toast.makeText(this@MainActivity, "Ошибка, поле не может быть пустыми" , Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@MainActivity, "Ошибка, поле не может быть пустыми", Toast.LENGTH_SHORT).show()
 
                         }
 
                         bindingClass.decryptButton.setOnClickListener {
-                            if (checkInTextAndInKey())
-                                bindingClass.encrDecryTV.text = Skitalo().crypt(0,
+                            if (checkInText()){
+                                val cypher = Skitalo().crypt(0,
                                         bindingClass.inputText.text.toString(),
-                                        bindingClass.inputKey.text.toString())[0]
+                                        bindingClass.inputKey.text.toString())
+                                bindingClass.encrDecryTV.text = cypher[0]
+                                bindingClass.TVKey.text = cypher[0]
+                            }
                             else
-                                Toast.makeText(this@MainActivity, "Ошибка, поле не может быть пустыми" , Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@MainActivity, "Ошибка, поле не может быть пустыми", Toast.LENGTH_SHORT).show()
 
                         }
                     }
                     arrayStr[position] == "Виженера" -> {
+                        // для того, чтобы в поле можно было вводить текст
                         bindingClass.inputKey.inputType = InputType.TYPE_CLASS_TEXT
-                        bindingClass.inputKey.isFocusable = true
-                        bindingClass.inputKey.isFocusableInTouchMode = true
-                        bindingClass.inputKey.isClickable = true
-                        bindingClass.inputKey.visibility = View.VISIBLE;
+                        VISIBLE()
 
                         bindingClass.encryptButton.setOnClickListener {
-                            if (checkInTextAndInKey())
-                            //сразу работаю с калссом Cezar не создовая его объект
-                                bindingClass.encrDecryTV.text = Vijenera().crypt(1,
+                            if (checkInTextAndInKey()){
+                                val cypher = Vijenera().crypt(1,
                                         bindingClass.inputText.text.toString(),
-                                        bindingClass.inputKey.text.toString())[0]
+                                        bindingClass.inputKey.text.toString())
+                                bindingClass.encrDecryTV.text = cypher[0]
+                                bindingClass.TVKey.text = cypher[1]
+                            }
                             else
-                                Toast.makeText(this@MainActivity, "Ошибка, поля не должны быть пустыми" , Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@MainActivity, "Ошибка, поля не должны быть пустыми", Toast.LENGTH_SHORT).show()
 
                         }
 
                         bindingClass.decryptButton.setOnClickListener {
-                            if (checkInTextAndInKey())
-                                bindingClass.encrDecryTV.text = Vijenera().crypt(0,
+                            if (checkInTextAndInKey()){
+                                val cypher = Vijenera().crypt(0,
                                         bindingClass.inputText.text.toString(),
-                                        bindingClass.inputKey.text.toString())[0]
+                                        bindingClass.inputKey.text.toString())
+                                bindingClass.encrDecryTV.text = cypher[0]
+                                bindingClass.TVKey.text = cypher[1]
+                            }
                             else
-                                Toast.makeText(this@MainActivity, "Ошибка, поля не должны быть пустыми" , Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@MainActivity, "Ошибка, поля не должны быть пустыми", Toast.LENGTH_SHORT).show()
 
                         }
                     }
                 }
 
             }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
-
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
-
-        // для копирования текста из encrDecryTV долгим нажатием
-        bindingClass.encrDecryTV.setOnLongClickListener {
-            val clipboard = bindingClass.encrDecryTV.context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager?
-            val clip = ClipData.newPlainText("Order Number", bindingClass.encrDecryTV.text.toString())
-            clipboard?.setPrimaryClip(clip)
-            Toast.makeText(this@MainActivity, "Текст был скопирован в буфер обмена", Toast.LENGTH_SHORT).show()
-            true
-        }
-
     }
 
 
-    fun checkInTextAndInKey() : Boolean {
-        if (bindingClass.inputText.text.toString().isEmpty() && bindingClass.inputText.text.toString().isEmpty())
-            return false
-        return true
+    // для копирования текста из encrDecryTV при нажатии на CopyAnswer
+    fun onClickCopyAnswer(view: View){
+        val clipboard = bindingClass.encrDecryTV.context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager?
+        val clip = ClipData.newPlainText("Order Number", bindingClass.encrDecryTV.text.toString())
+        clipboard?.setPrimaryClip(clip)
+        Toast.makeText(this@MainActivity, "Ответ был скопирован в буфер обмена", Toast.LENGTH_SHORT).show()
     }
 
-    fun checkInText() : Boolean {
-        if (bindingClass.inputText.text.toString().isEmpty())
-            return false
-        return true
+    fun onClickCopyText(view: View){
+        val clipboard = bindingClass.inputText.context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager?
+        val clip = ClipData.newPlainText("Order Number", bindingClass.inputText.text.toString())
+        clipboard?.setPrimaryClip(clip)
+        Toast.makeText(this@MainActivity, "Текст был скопирован в буфер обмена", Toast.LENGTH_SHORT).show()
+    }
+
+    fun onClickCopyKey(view: View){
+        val clipboard = bindingClass.TVKey.context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager?
+        val clip = ClipData.newPlainText("Order Number", bindingClass.TVKey.text.toString())
+        clipboard?.setPrimaryClip(clip)
+        Toast.makeText(this@MainActivity, "Ключ был скопирован в буфер обмена", Toast.LENGTH_SHORT).show()
     }
 
 
+    //чтобы вставить текст из буфера обмена
+    fun onClickPasteText(view: View){
+        val myClipboard = (getSystemService(CLIPBOARD_SERVICE) as ClipboardManager?)!!
+        val abc = myClipboard.primaryClip
+        val item = abc?.getItemAt(0)
+        bindingClass.inputText.setText(item?.text.toString())
+        Toast.makeText(applicationContext, "Text Pasted", Toast.LENGTH_SHORT).show()
+    }
 
+    fun onClickPasteKey(view: View){
+        val myClipboard = (getSystemService(CLIPBOARD_SERVICE) as ClipboardManager?)!!
+        val abc = myClipboard.primaryClip
+        val item = abc?.getItemAt(0)
+        bindingClass.inputKey.setText(item?.text.toString())
+        Toast.makeText(applicationContext, "Key Pasted", Toast.LENGTH_SHORT).show()
+    }
 
 
     override fun onStart() {
@@ -215,6 +269,32 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         Log.d("MainAct_Log", "onDestroy")
+    }
+
+
+    private fun checkInTextAndInKey() : Boolean {
+        if (bindingClass.inputText.text.toString().isEmpty() && bindingClass.inputText.text.toString().isEmpty())
+            return false
+        return true
+    }
+
+    private fun checkInText() : Boolean {
+        if (bindingClass.inputText.text.toString().isEmpty())
+            return false
+        return true
+    }
+
+
+    // делаем поля кликабельными и выдимыми
+    fun VISIBLE(){
+        bindingClass.inputKey.visibility = View.VISIBLE
+        bindingClass.pasteKey.visibility = View.VISIBLE
+    }
+
+    // делаем поля не кликабельными и не выдимыми
+    fun INVISIBLE(){
+        bindingClass.inputKey.visibility = View.GONE
+        bindingClass.pasteKey.visibility = View.GONE
     }
 
 }
