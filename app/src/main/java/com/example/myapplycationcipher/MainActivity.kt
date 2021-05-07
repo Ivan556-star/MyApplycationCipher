@@ -3,7 +3,6 @@ package com.example.myapplycationcipher
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log
@@ -28,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         SPINER()
         // запрет на поворот экрана
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        //requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
 
     override fun onStart() {
