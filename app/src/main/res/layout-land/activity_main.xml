@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/kod_bajt_tsifry_121341_1920x1080"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageButton
@@ -47,6 +48,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:hint="Ответ"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.408"
@@ -61,6 +64,8 @@
         android:ems="10"
         android:hint="Введите текст"
         android:inputType="textPersonName"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.433"
@@ -88,6 +93,8 @@
         android:ems="10"
         android:hint="Введите ключ"
         android:inputType="textPersonName"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.433"
@@ -152,6 +159,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Ваш ключ"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.457"

@@ -3,15 +3,18 @@ package com.example.myapplycationcipher
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.isDigitsOnly
 import com.example.myapplycationcipher.databinding.ActivityMainBinding
+
 
 object Constants{
     const val ANSWER = "ANSWER"
@@ -92,6 +95,12 @@ class MainActivity : AppCompatActivity() {
         // для проверки, что выбрал пользователь в спинере
         bindingClass.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                //чтобы изменить цвет текста в спинере на белый
+                try {
+                    (parent!!.getChildAt(0) as TextView).setTextColor(Color.WHITE)
+                }catch (e: NullPointerException){
+                    Log.e("MainAct_Log", "NullPointerException")
+                }
                 //Toast.makeText(this@MainActivity, "Вы выбрали шифр: ${arrayStr[position]}", Toast.LENGTH_SHORT).show()
                 when {
                     arrayStr[position] == "Цезаря" -> {
