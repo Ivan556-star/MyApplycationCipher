@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyApplycationCipher</string>
+    <string name="app_name">CipherVRT</string>
     <string name="encrypt">Encrypt</string>
     <string name="decrypt">Decrypt</string>
     <string-array name="namesCyphers">

@@ -7,6 +7,9 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.TextView
@@ -14,6 +17,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.isDigitsOnly
 import com.example.myapplycationcipher.databinding.ActivityMainBinding
+import java.util.zip.Inflater
 
 
 object Constants{
@@ -70,6 +74,27 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
         Log.d("MainAct_Log", "onDestroy\n-------")
     }
+
+    // для создрания optionMenu и реагирования на нажатие кнопок в этом меню
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.aboutCyphers ->{
+                // указываем из какой активити в какую переходим
+                val intent = Intent(this, AboutCyphers::class.java)
+                // открываем указанную активити
+                startActivity(intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+    // ---------------------------------------------------------------------------
 
     // сохраняем состояние активности после поворота экрана
     override fun onSaveInstanceState(outState: Bundle) {
