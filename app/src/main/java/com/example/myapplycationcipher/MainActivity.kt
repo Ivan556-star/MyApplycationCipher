@@ -13,6 +13,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.isDigitsOnly
 import com.example.myapplycationcipher.databinding.ActivityMainBinding
 
+object Constants{
+    const val ANSWER = "ANSWER"
+    const val KEY = "KEY"
+}
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bindingClass: ActivityMainBinding
@@ -28,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         SPINER()
         // запрет на поворот экрана
         //requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+
     }
 
     override fun onStart() {
@@ -59,11 +65,24 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.d("MainAct_Log", "onDestroy")
+        Log.d("MainAct_Log", "onDestroy\n-------")
     }
 
+    // сохраняем состояние активности после поворота экрана
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.run {
+            putString("ANSWER", bindingClass.encrDecryTV.text.toString())
+            putString("KEY", bindingClass.TVKey.text.toString())
+        }
+    }
 
-
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        bindingClass.encrDecryTV.text = savedInstanceState.getString(Constants.ANSWER)
+        bindingClass.TVKey.text = savedInstanceState.getString(Constants.KEY)
+    }
+    // -----------------------------------------------------------------------------
 
 
     private fun SPINER(){
@@ -73,7 +92,7 @@ class MainActivity : AppCompatActivity() {
         // для проверки, что выбрал пользователь в спинере
         bindingClass.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                Toast.makeText(this@MainActivity, "Вы выбрали шифр: ${arrayStr[position]}", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this@MainActivity, "Вы выбрали шифр: ${arrayStr[position]}", Toast.LENGTH_SHORT).show()
                 when {
                     arrayStr[position] == "Цезаря" -> {
                         // для ввода только цифр
