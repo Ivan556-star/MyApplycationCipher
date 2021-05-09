@@ -6,4 +6,62 @@
     android:layout_height="match_parent"
     tools:context=".AboutCyphers">
 
+    <TextView
+        android:id="@+id/textViewAboutCyphers"
+        android:layout_width="match_parent"
+        android:layout_height="91dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.281" />
+
+    <Spinner
+        android:id="@+id/spinnerAboutCyphers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:entries="@array/namesCyphers"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.941"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.034" />
+
+    <TextView
+        android:id="@+id/cypherAbout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="О шифре"
+        app:layout_constraintBottom_toTopOf="@+id/textViewAboutCyphers"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.922" />
+
+    <TextView
+        android:id="@+id/manual"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Инструкция"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAboutCyphers"
+        app:layout_constraintVertical_bias="0.216" />
+
+    <TextView
+        android:id="@+id/descOfTheAlgorithm"
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:scrollbars = "vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/manual"
+        app:layout_constraintVertical_bias="0.073" />
 </androidx.constraintlayout.widget.ConstraintLayout>
