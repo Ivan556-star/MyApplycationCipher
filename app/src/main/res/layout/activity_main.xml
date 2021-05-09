@@ -4,43 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/kod_bajt_tsifry_121341_1080x1920"
+    android:background="@drawable/matrixx"
+    android:hapticFeedbackEnabled="false"
     tools:context=".MainActivity">
 
     <ImageButton
         android:id="@+id/pasteKey"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="?attr/actionModePasteDrawable"
+        android:backgroundTint="@color/material_on_background_disabled"
+        android:hapticFeedbackEnabled="false"
         android:onClick="onClickPasteKey"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:src="?attr/actionModePasteDrawable"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/inputKey"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.371"
-        app:srcCompat="?attr/actionModePasteDrawable" />
+        app:layout_constraintVertical_bias="0.371" />
 
     <Button
         android:id="@+id/encryptButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
+        android:layout_marginStart="32dp"
+        android:backgroundTint="@color/material_on_background_disabled"
+        android:ellipsize="none"
         android:text="@string/encrypt"
+        android:textColor="@color/white"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.135"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.816" />
+        app:layout_constraintVertical_bias="0.809" />
 
     <Button
         android:id="@+id/decryptButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="@color/material_on_background_disabled"
+        android:ellipsize="none"
         android:text="@string/decrypt"
+        android:textColor="@color/white"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.395"
-        app:layout_constraintStart_toEndOf="@+id/encryptButton"
+        app:layout_constraintHorizontal_bias="0.829"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.814" />
+        app:layout_constraintVertical_bias="0.81" />
 
     <TextView
         android:id="@+id/encrDecryTV"
@@ -52,10 +67,10 @@
         android:textColorHint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.352"
+        app:layout_constraintHorizontal_bias="0.394"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.147" />
+        app:layout_constraintVertical_bias="0.15" />
 
     <EditText
         android:id="@+id/inputText"
@@ -103,54 +118,63 @@
 
     <ImageButton
         android:id="@+id/CopyAnswer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="?attr/actionModeCopyDrawable"
+        android:backgroundTint="@color/material_on_background_disabled"
+        android:backgroundTintMode="multiply"
         android:onClick="onClickCopyAnswer"
+        android:src="?attr/actionModeCopyDrawable"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/encrDecryTV"
-        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintHorizontal_bias="0.09"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.13"
-        app:srcCompat="?attr/actionModeCopyDrawable" />
+        app:layout_constraintVertical_bias="0.13" />
 
     <ImageButton
         android:id="@+id/copyText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="?attr/actionModeCopyDrawable"
+        android:backgroundTint="@color/material_on_background_disabled"
         android:onClick="onClickCopyText"
+        android:src="?attr/actionModeCopyDrawable"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/inputText"
         app:layout_constraintHorizontal_bias="0.3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.255"
-        app:srcCompat="?attr/actionModeCopyDrawable" />
+        app:layout_constraintVertical_bias="0.255" />
 
     <ImageButton
         android:id="@+id/copyKey"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="?attr/actionModeCopyDrawable"
+        android:backgroundTint="@color/material_on_background_disabled"
         android:onClick="onClickCopyKey"
+        android:src="?attr/actionModeCopyDrawable"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/TVKey"
-        app:layout_constraintHorizontal_bias="0.048"
+        app:layout_constraintHorizontal_bias="0.12"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.532"
-        app:srcCompat="?attr/actionModeCopyDrawable" />
+        app:layout_constraintVertical_bias="0.53" />
 
     <ImageButton
         android:id="@+id/pasteText"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="?attr/actionModePasteDrawable"
+        android:backgroundTint="@color/material_on_background_emphasis_high_type"
         android:onClick="onClickPasteText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:src="?attr/actionModePasteDrawable"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/inputText"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25"
-        app:srcCompat="?attr/actionModePasteDrawable" />
+        app:layout_constraintVertical_bias="0.25" />
 
     <TextView
         android:id="@+id/TVKey"
@@ -160,16 +184,17 @@
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.535" />
+        app:layout_constraintEnd_toEndOf="@+id/inputKey"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="@+id/inputKey"
+        app:layout_constraintTop_toBottomOf="@+id/inputKey"
+        app:layout_constraintVertical_bias="0.163" />
 
     <ImageButton
         android:id="@+id/shareAnswer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/material_on_background_disabled"
         android:onClick="onClickShareAnswer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -183,6 +208,7 @@
         android:id="@+id/shareKey"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/material_on_background_disabled"
         android:onClick="onClickShareKey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

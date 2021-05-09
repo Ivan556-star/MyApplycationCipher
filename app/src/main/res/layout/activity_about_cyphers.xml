@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/knigi_polka_biblioteka_123516_2160x3840"
     tools:context=".AboutCyphers">
 
     <TextView
         android:id="@+id/textViewAboutCyphers"
         android:layout_width="match_parent"
-        android:layout_height="91dp"
+        android:layout_height="354dp"
         android:scrollbars="vertical"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -35,6 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="О шифре"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/textViewAboutCyphers"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -47,21 +50,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Инструкция"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewAboutCyphers"
-        app:layout_constraintVertical_bias="0.216" />
+        app:layout_constraintVertical_bias="0.347" />
 
     <TextView
         android:id="@+id/descOfTheAlgorithm"
         android:layout_width="match_parent"
         android:layout_height="96dp"
-        android:scrollbars = "vertical"
+        android:scrollbars="vertical"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/manual"
-        app:layout_constraintVertical_bias="0.073" />
+        app:layout_constraintVertical_bias="0.966" />
 </androidx.constraintlayout.widget.ConstraintLayout>

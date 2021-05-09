@@ -15,6 +15,7 @@ import android.widget.AdapterView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.text.isDigitsOnly
 import com.example.myapplycationcipher.databinding.ActivityMainBinding
 import java.util.zip.Inflater
@@ -40,6 +41,8 @@ class MainActivity : AppCompatActivity() {
         SPINER()
         // запрет на поворот экрана
         //requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        // программно отключаем тёмную тему
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
     }
 
@@ -126,6 +129,7 @@ class MainActivity : AppCompatActivity() {
                 }catch (e: NullPointerException){
                     Log.e("MainAct_Log", "NullPointerException")
                 }
+
                 //Toast.makeText(this@MainActivity, "Вы выбрали шифр: ${arrayStr[position]}", Toast.LENGTH_SHORT).show()
                 when {
                     arrayStr[position] == "Цезаря" -> {

@@ -1,5 +1,6 @@
 package com.example.myapplycationcipher
 
+import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
@@ -19,6 +20,9 @@ class AboutCyphers : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         bindingClass = ActivityAboutCyphersBinding.inflate(layoutInflater)
         setContentView(bindingClass.root)
+
+        // запрет на поворот экрана
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
         SPINER()
         //Чтобы текст в textView можно было скролить. Также в xml коде нужно добавить параметр ' android:scrollbars="vertical" '
