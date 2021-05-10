@@ -18,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.text.isDigitsOnly
 import com.example.myapplycationcipher.databinding.ActivityMainBinding
-import java.util.zip.Inflater
 
 
 object Constants{
@@ -42,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         // запрет на поворот экрана
         //requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         // программно отключаем тёмную тему
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
     }
 
@@ -87,7 +86,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
-            R.id.aboutCyphers ->{
+            R.id.aboutCyphers -> {
                 // указываем из какой активити в какую переходим
                 val intent = Intent(this, AboutCyphers::class.java)
                 // открываем указанную активити
