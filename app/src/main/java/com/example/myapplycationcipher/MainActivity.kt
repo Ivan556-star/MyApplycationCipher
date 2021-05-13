@@ -12,12 +12,14 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
+import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.text.isDigitsOnly
 import com.example.myapplycationcipher.databinding.ActivityMainBinding
+import java.util.zip.Inflater
 
 
 object Constants{
@@ -42,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         //requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         // программно отключаем тёмную тему
         //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-
+        popUpMenu()
     }
 
     override fun onStart() {
@@ -78,25 +80,46 @@ class MainActivity : AppCompatActivity() {
     }
 
     // для создрания optionMenu и реагирования на нажатие кнопок в этом меню
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.menu, menu)
-        return true
-    }
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        val inflater: MenuInflater = menuInflater
+//        inflater.inflate(R.menu.menu, menu)
+//        return true
+//    }
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        return when(item.itemId){
+//            R.id.aboutCyphers -> {
+//                // указываем из какой активити в какую переходим
+//                val intent = Intent(this, AboutCyphers::class.java)
+//                // открываем указанную активити
+//                startActivity(intent)
+//                true
+//            }
+//            else -> super.onOptionsItemSelected(item)
+//        }
+//    }
+    // ---------------------------------------------------------------------------
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
-            R.id.aboutCyphers -> {
-                // указываем из какой активити в какую переходим
-                val intent = Intent(this, AboutCyphers::class.java)
-                // открываем указанную активити
-                startActivity(intent)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
+    // функция всплывающего окна при наэатии на more
+    fun popUpMenu(){
+        bindingClass.More.setOnClickListener {
+            val popMenu = PopupMenu(this, bindingClass.More)
+            popMenu.menuInflater.inflate(R.menu.popup_menu, popMenu.menu)
+            popMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener{
+                override fun onMenuItemClick(item: MenuItem?): Boolean {
+                    when(item!!.itemId){
+                        R.id.cyphers ->{
+                            val intent = Intent(this@MainActivity, AboutCyphers::class.java)
+                            startActivity(intent)
+                        }
+                    }
+                    return true
+                }
+            })
+            popMenu.show()
         }
     }
-    // ---------------------------------------------------------------------------
+
 
     // сохраняем состояние активности после поворота экрана
     override fun onSaveInstanceState(outState: Bundle) {

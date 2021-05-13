@@ -1,6 +1,7 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">CipherVRT</string>
     <string name="encrypt">Encrypt</string>
+    <string name="todo" tools:ignore="DuplicateDefinition">TODO</string>
     <string name="decrypt">Decrypt</string>
     <string name="Cezar">
         Шифр Цезаря, также известный как шифр сдвига,

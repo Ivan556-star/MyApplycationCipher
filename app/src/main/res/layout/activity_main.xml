@@ -4,9 +4,162 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/matrixx"
+    android:background="@drawable/treugolniki_geometricheskij_mozaika_124638_2160x3840"
     android:hapticFeedbackEnabled="false"
     tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/More"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="2dp"
+        android:backgroundTint="@color/white"
+        android:contentDescription="@string/todo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_more"
+        tools:ignore="MissingConstraints" />
+
+
+    <TextView
+        android:id="@+id/cyphersTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Виды шифров:"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/spinner"
+        app:layout_constraintHorizontal_bias="0.972"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.174" />
+
+    <EditText
+        android:id="@+id/inputKey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="Введите ключ"
+        android:inputType="textPersonName"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/inputText"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/inputText"
+        app:layout_constraintTop_toBottomOf="@+id/inputText" />
+
+    <TextView
+        android:id="@+id/encrDecryTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:hint="Ответ"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.42"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.296" />
+
+    <Button
+        android:id="@+id/encryptButton"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:backgroundTint="?attr/colorControlHighlight"
+        android:ellipsize="none"
+        android:text="@string/encrypt"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.164"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.962" />
+
+    <EditText
+        android:id="@+id/inputText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="Введите текст"
+        android:inputType="textPersonName"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/encrDecryTV"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="@+id/encrDecryTV"
+        app:layout_constraintTop_toBottomOf="@+id/encrDecryTV" />
+
+    <Button
+        android:id="@+id/decryptButton"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+
+        android:backgroundTint="?attr/colorControlHighlight"
+        android:ellipsize="none"
+        android:text="@string/decrypt"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.86"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.962" />
+
+    <ImageButton
+        android:id="@+id/copyKey"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:backgroundTint="@color/material_on_background_disabled"
+        android:onClick="onClickCopyKey"
+        android:src="?attr/actionModeCopyDrawable"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/TVKey"
+        app:layout_constraintHorizontal_bias="0.163"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.682" />
+
+    <ImageButton
+        android:id="@+id/pasteText"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:backgroundTint="@color/material_on_background_disabled"
+        android:onClick="onClickPasteText"
+        android:src="?attr/actionModePasteDrawable"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/inputText"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.402" />
+
+    <ImageButton
+        android:id="@+id/CopyAnswer"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:backgroundTint="@color/material_on_background_disabled"
+        android:backgroundTintMode="multiply"
+        android:onClick="onClickCopyAnswer"
+        android:src="?attr/actionModeCopyDrawable"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/encrDecryTV"
+        app:layout_constraintHorizontal_bias="0.153"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.281" />
 
     <ImageButton
         android:id="@+id/pasteKey"
@@ -20,118 +173,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/inputKey"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.371" />
-
-    <Button
-        android:id="@+id/encryptButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        style="?android:attr/borderlessButtonStyle"
-        android:backgroundTint="?attr/colorControlHighlight"
-        android:ellipsize="none"
-        android:text="@string/encrypt"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.135"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.809" />
-
-    <Button
-        android:id="@+id/decryptButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        style="?android:attr/borderlessButtonStyle"
-
-        android:backgroundTint="?attr/colorControlHighlight"
-        android:ellipsize="none"
-        android:text="@string/decrypt"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.829"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.81" />
-
-    <TextView
-        android:id="@+id/encrDecryTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:hint="Ответ"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.394"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.15" />
-
-    <EditText
-        android:id="@+id/inputText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:ems="10"
-        android:hint="Введите текст"
-        android:inputType="textPersonName"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/encrDecryTV"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="@+id/encrDecryTV"
-        app:layout_constraintTop_toBottomOf="@+id/encrDecryTV" />
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
-        android:entries="@array/namesCyphers"
-        android:gravity="center_horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.985"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.027" />
-
-    <EditText
-        android:id="@+id/inputKey"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Введите ключ"
-        android:inputType="textPersonName"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/inputText"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/inputText"
-        app:layout_constraintTop_toBottomOf="@+id/inputText" />
-
-    <ImageButton
-        android:id="@+id/CopyAnswer"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:backgroundTint="@color/material_on_background_disabled"
-        android:backgroundTintMode="multiply"
-        android:onClick="onClickCopyAnswer"
-        android:src="?attr/actionModeCopyDrawable"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/encrDecryTV"
-        app:layout_constraintHorizontal_bias="0.09"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.13" />
+        app:layout_constraintVertical_bias="0.524" />
 
     <ImageButton
         android:id="@+id/copyText"
@@ -142,37 +184,24 @@
         android:src="?attr/actionModeCopyDrawable"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/inputText"
-        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintHorizontal_bias="0.363"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.255" />
+        app:layout_constraintVertical_bias="0.407" />
 
     <ImageButton
-        android:id="@+id/copyKey"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:id="@+id/shareKey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:backgroundTint="@color/material_on_background_disabled"
-        android:onClick="onClickCopyKey"
-        android:src="?attr/actionModeCopyDrawable"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/TVKey"
-        app:layout_constraintHorizontal_bias="0.12"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.53" />
-
-    <ImageButton
-        android:id="@+id/pasteText"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:backgroundTint="@color/material_on_background_disabled"
-        android:onClick="onClickPasteText"
-        android:src="?attr/actionModePasteDrawable"
+        android:onClick="onClickShareKey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/inputText"
+        app:layout_constraintHorizontal_bias="0.814"
+        app:layout_constraintStart_toEndOf="@+id/TVKey"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintVertical_bias="0.692"
+        app:srcCompat="@android:drawable/ic_menu_share" />
 
     <TextView
         android:id="@+id/TVKey"
@@ -183,10 +212,24 @@
         android:textColorHint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/inputKey"
-        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintHorizontal_bias="0.458"
         app:layout_constraintStart_toStartOf="@+id/inputKey"
         app:layout_constraintTop_toBottomOf="@+id/inputKey"
-        app:layout_constraintVertical_bias="0.163" />
+        app:layout_constraintVertical_bias="0.22" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:entries="@array/namesCyphers"
+        android:gravity="center_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.996"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.174" />
 
     <ImageButton
         android:id="@+id/shareAnswer"
@@ -196,39 +239,10 @@
         android:onClick="onClickShareAnswer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.792"
+        app:layout_constraintHorizontal_bias="0.858"
         app:layout_constraintStart_toEndOf="@+id/encrDecryTV"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.132"
+        app:layout_constraintVertical_bias="0.287"
         app:srcCompat="@android:drawable/ic_menu_share" />
-
-    <ImageButton
-        android:id="@+id/shareKey"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/material_on_background_disabled"
-        android:onClick="onClickShareKey"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.774"
-        app:layout_constraintStart_toEndOf="@+id/TVKey"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.539"
-        app:srcCompat="@android:drawable/ic_menu_share" />
-
-    <TextView
-        android:id="@+id/cyphersTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Виды шифров:"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/spinner"
-        app:layout_constraintHorizontal_bias="0.918"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.025" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

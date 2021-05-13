@@ -40,7 +40,7 @@ class AboutCyphers : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 //чтобы изменить цвет текста в спинере на белый
                 try {
-                    (parent!!.getChildAt(0) as TextView).setTextColor(Color.WHITE)
+                    (parent!!.getChildAt(0) as TextView).setTextColor(Color.BLACK)
                 }catch (e: NullPointerException){
                     Log.e("MainAct_Log", "NullPointerException")
                 }

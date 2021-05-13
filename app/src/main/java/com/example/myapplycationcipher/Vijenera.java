@@ -9,16 +9,18 @@ public class Vijenera implements shifr {
         KEY = KEY.toUpperCase().replace(" ", "_");
 
         if (choiceShifr == 1){
+            int k = 0;
             while (KEY.length() < text.length()){
-                if (RU().contains(String.valueOf(text.charAt(KEY.length())))){
+                if (RU().contains(String.valueOf(text.charAt(k)))){
                     KEY += RU().charAt(r.nextInt(RU().length()));
                 }
-                if (EN().contains(String.valueOf(text.charAt(KEY.length())))){
+                if (EN().contains(String.valueOf(text.charAt(k)))){
                     KEY += EN().charAt(r.nextInt(EN().length()));
                 }
-                if (SIM().contains(String.valueOf(text.charAt(KEY.length())))){
+                if (SIM().contains(String.valueOf(text.charAt(k)))){
                     KEY += SIM().charAt(r.nextInt(SIM().length()));
                 }
+                k++;
             }
 
             int indexTMP, indexKEY;
