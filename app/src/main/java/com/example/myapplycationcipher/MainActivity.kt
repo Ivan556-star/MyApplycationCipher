@@ -7,19 +7,14 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import android.widget.AdapterView
 import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.isDigitsOnly
 import com.example.myapplycationcipher.databinding.ActivityMainBinding
-import java.util.zip.Inflater
 
 
 object Constants{
@@ -40,11 +35,25 @@ class MainActivity : AppCompatActivity() {
         Log.d("MainAct_Log", "OnCreate")
 
         SPINER()
+
+        
         // запрет на поворот экрана
         //requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         // программно отключаем тёмную тему
         //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+
         popUpMenu()
+
+        //чтобы сделать строку состояния и сстроку системных кнопок прозрачными.
+        // Также нужно добавить в файл разметки android:fitsSystemWindows="true"
+        // и в теме тожно указать
+        // <item name="android:windowTranslucentStatus">true</item>
+        //  <item name="android:windowTranslucentNavigation">true</item>
+        window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+
+
+
     }
 
     override fun onStart() {
@@ -105,10 +114,10 @@ class MainActivity : AppCompatActivity() {
         bindingClass.More.setOnClickListener {
             val popMenu = PopupMenu(this, bindingClass.More)
             popMenu.menuInflater.inflate(R.menu.popup_menu, popMenu.menu)
-            popMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener{
+            popMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
                 override fun onMenuItemClick(item: MenuItem?): Boolean {
-                    when(item!!.itemId){
-                        R.id.cyphers ->{
+                    when (item!!.itemId) {
+                        R.id.cyphers -> {
                             val intent = Intent(this@MainActivity, AboutCyphers::class.java)
                             startActivity(intent)
                         }
@@ -145,6 +154,8 @@ class MainActivity : AppCompatActivity() {
         // для проверки, что выбрал пользователь в спинере
         bindingClass.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
+
                 //чтобы изменить цвет текста в спинере на белый
                 try {
                     (parent!!.getChildAt(0) as TextView).setTextColor(Color.WHITE)
@@ -317,6 +328,7 @@ class MainActivity : AppCompatActivity() {
         val clip = ClipData.newPlainText("Order Number", bindingClass.encrDecryTV.text.toString())
         clipboard?.setPrimaryClip(clip)
         Toast.makeText(this@MainActivity, "Ответ был скопирован в буфер обмена", Toast.LENGTH_SHORT).show()
+
     }
 
     fun onClickCopyText(view: View){
@@ -354,20 +366,18 @@ class MainActivity : AppCompatActivity() {
 
     //для передачи ответа в другие приложения
     fun onClickShareAnswer(view: View){
-        val answer = "Текст:\n${bindingClass.encrDecryTV.text}"
         val intent = Intent()
         intent.action = Intent.ACTION_SEND
-        intent.putExtra(Intent.EXTRA_TEXT, answer)
+        intent.putExtra(Intent.EXTRA_TEXT, bindingClass.encrDecryTV.text.toString())
         intent.type = "text/plain"
 
         startActivity(Intent.createChooser(intent, "Отправить в:"))
     }
 
     fun onClickShareKey(view: View){
-        val key = "Ключ:\n${bindingClass.TVKey.text}"
         val intent = Intent()
         intent.action = Intent.ACTION_SEND
-        intent.putExtra(Intent.EXTRA_TEXT, key)
+        intent.putExtra(Intent.EXTRA_TEXT, bindingClass.TVKey.text.toString())
         intent.type = "text/plain"
 
         startActivity(Intent.createChooser(intent, "Отправить в:"))

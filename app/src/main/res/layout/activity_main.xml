@@ -4,23 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:background="@drawable/treugolniki_geometricheskij_mozaika_124638_2160x3840"
     android:hapticFeedbackEnabled="false"
     tools:context=".MainActivity">
+
 
     <ImageView
         android:id="@+id/More"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="2dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="36dp"
         android:backgroundTint="@color/white"
         android:contentDescription="@string/todo"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_more"
         tools:ignore="MissingConstraints" />
-
 
     <TextView
         android:id="@+id/cyphersTV"
@@ -73,6 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginBottom="32dp"
         android:backgroundTint="?attr/colorControlHighlight"
         android:ellipsize="none"
         android:text="@string/encrypt"
@@ -107,6 +109,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
 
+        android:layout_marginBottom="32dp"
         android:backgroundTint="?attr/colorControlHighlight"
         android:ellipsize="none"
         android:text="@string/decrypt"
