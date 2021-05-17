@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.text.InputType
+import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.*
 import android.widget.AdapterView
@@ -26,7 +27,8 @@ object Constants{
 class MainActivity : AppCompatActivity() {
     private lateinit var bindingClass: ActivityMainBinding
     private var backPressedTime: Long = 0
-
+    private var answerText = ""
+    private var answerKey = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +37,6 @@ class MainActivity : AppCompatActivity() {
         Log.d("MainAct_Log", "OnCreate")
 
         SPINER()
-
         
         // запрет на поворот экрана
         //requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
@@ -52,7 +53,9 @@ class MainActivity : AppCompatActivity() {
         //  <item name="android:windowTranslucentNavigation">true</item>
         window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
 
-
+        //Чтобы текст в textView можно было скролить. Также в xml коде нужно добавить параметр ' android:scrollbars="vertical" '
+        bindingClass.encrDecryTV.setMovementMethod(ScrollingMovementMethod())
+        bindingClass.TVKey.setMovementMethod(ScrollingMovementMethod())
 
     }
 
@@ -65,6 +68,8 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         Log.d("MainAct_Log", "onResume")
+
+
 
     }
 
@@ -133,16 +138,28 @@ class MainActivity : AppCompatActivity() {
     // сохраняем состояние активности после поворота экрана
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
+
+
         outState.run {
             putString("ANSWER", bindingClass.encrDecryTV.text.toString())
             putString("KEY", bindingClass.TVKey.text.toString())
+            answerText = bindingClass.encrDecryTV.text.toString()
+            answerKey = bindingClass.TVKey.text.toString()
         }
+        Log.d("MainAct_Log", "onSaveInstanceState")
+        Log.d("MainAct_Log", bindingClass.encrDecryTV.text.toString())
+        Log.d("MainAct_Log", bindingClass.TVKey.text.toString())
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
+
+
         bindingClass.encrDecryTV.text = savedInstanceState.getString(Constants.ANSWER)
         bindingClass.TVKey.text = savedInstanceState.getString(Constants.KEY)
+        Log.d("MainAct_Log", "onRestoreInstanceState")
+        Log.d("MainAct_Log", savedInstanceState.getString(Constants.ANSWER).toString())
+        Log.d("MainAct_Log", savedInstanceState.getString(Constants.KEY).toString())
     }
     // -----------------------------------------------------------------------------
 
@@ -166,6 +183,8 @@ class MainActivity : AppCompatActivity() {
                 //Toast.makeText(this@MainActivity, "Вы выбрали шифр: ${arrayStr[position]}", Toast.LENGTH_SHORT).show()
                 when {
                     arrayStr[position] == "Цезаря" -> {
+                        setDefaultText()
+
                         // для ввода только цифр
                         bindingClass.inputKey.inputType = InputType.TYPE_CLASS_NUMBER
                         VISIBLE()
@@ -198,7 +217,7 @@ class MainActivity : AppCompatActivity() {
                                         Toast.LENGTH_SHORT).show()
 
                         }
-
+//nhghk
                         bindingClass.decryptButton.setOnClickListener {
                             if (checkInTextAndInKey())
                                 try {
@@ -226,6 +245,8 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                     arrayStr[position] == "Атбаш" -> {
+                        setDefaultText()
+
                         INVISIBLE()
 
                         bindingClass.encryptButton.setOnClickListener {
@@ -255,6 +276,8 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                     arrayStr[position] == "Спарты" -> {
+                        setDefaultText()
+
                         INVISIBLE()
 
                         bindingClass.encryptButton.setOnClickListener {
@@ -284,6 +307,8 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                     arrayStr[position] == "Виженера" -> {
+                        setDefaultText()
+
                         // для того, чтобы в поле можно было вводить текст
                         bindingClass.inputKey.inputType = InputType.TYPE_CLASS_TEXT
                         VISIBLE()
@@ -408,6 +433,11 @@ class MainActivity : AppCompatActivity() {
     fun INVISIBLE(){
         bindingClass.inputKey.visibility = View.GONE
         bindingClass.pasteKey.visibility = View.GONE
+    }
+
+    fun setDefaultText(){
+        bindingClass.encrDecryTV.text = "Ваше Зашифрованное сообшение"
+        bindingClass.TVKey.text = "Ваш ключ от шифра"
     }
 
     // системная кнопка "Назад"
