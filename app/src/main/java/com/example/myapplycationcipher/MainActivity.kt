@@ -22,7 +22,6 @@ import com.example.myapplycationcipher.databinding.ActivityMainBinding
 object Constants{
     const val ANSWER = "ANSWER"
     const val KEY = "KEY"
-    const val TURNED = "TURNED"
 }
 
 
@@ -143,23 +142,13 @@ class MainActivity : AppCompatActivity() {
         outState.run {
             putString("ANSWER", bindingClass.encrDecryTV.text.toString())
             putString("KEY", bindingClass.TVKey.text.toString())
-            //putBoolean("TURNED", turned)
         }
-
-        Log.d("MainAct_Log", "onSaveInstanceState")
-        Log.d("MainAct_Log", bindingClass.encrDecryTV.text.toString())
-        Log.d("MainAct_Log", bindingClass.TVKey.text.toString())
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         bindingClass.encrDecryTV.text = savedInstanceState.getString(Constants.ANSWER)
         bindingClass.TVKey.text = savedInstanceState.getString(Constants.KEY)
-       // turned = savedInstanceState.getBoolean(Constants.TURNED)
-
-        Log.d("MainAct_Log", "onRestoreInstanceState")
-        Log.d("MainAct_Log", savedInstanceState.getString(Constants.ANSWER).toString())
-        Log.d("MainAct_Log", savedInstanceState.getString(Constants.KEY).toString())
     }
     // -----------------------------------------------------------------------------
 
