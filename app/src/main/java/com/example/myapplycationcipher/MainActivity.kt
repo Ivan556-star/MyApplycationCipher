@@ -3,6 +3,7 @@ package com.example.myapplycationcipher
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
 import android.text.InputType
@@ -21,14 +22,14 @@ import com.example.myapplycationcipher.databinding.ActivityMainBinding
 object Constants{
     const val ANSWER = "ANSWER"
     const val KEY = "KEY"
+    const val TURNED = "TURNED"
 }
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bindingClass: ActivityMainBinding
     private var backPressedTime: Long = 0
-    private var answerText = ""
-    private var answerKey = ""
+    private var turned = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +37,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(bindingClass.root)
         Log.d("MainAct_Log", "OnCreate")
 
-        SPINER()
+        if (bindingClass.encrDecryTV.text.toString() != "Ваше Зашифрованное сообшение" ||
+            bindingClass.TVKey.text.toString() != "Ваш ключ от шифра")
+             SPINER()
+
+
         
         // запрет на поворот экрана
         //requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
@@ -62,15 +67,11 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         Log.d("MainAct_Log", "onStart")
-
     }
 
     override fun onResume() {
         super.onResume()
         Log.d("MainAct_Log", "onResume")
-
-
-
     }
 
     override fun onPause() {
@@ -139,13 +140,12 @@ class MainActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
 
-
         outState.run {
             putString("ANSWER", bindingClass.encrDecryTV.text.toString())
             putString("KEY", bindingClass.TVKey.text.toString())
-            answerText = bindingClass.encrDecryTV.text.toString()
-            answerKey = bindingClass.TVKey.text.toString()
+            //putBoolean("TURNED", turned)
         }
+
         Log.d("MainAct_Log", "onSaveInstanceState")
         Log.d("MainAct_Log", bindingClass.encrDecryTV.text.toString())
         Log.d("MainAct_Log", bindingClass.TVKey.text.toString())
@@ -153,10 +153,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-
-
         bindingClass.encrDecryTV.text = savedInstanceState.getString(Constants.ANSWER)
         bindingClass.TVKey.text = savedInstanceState.getString(Constants.KEY)
+       // turned = savedInstanceState.getBoolean(Constants.TURNED)
+
         Log.d("MainAct_Log", "onRestoreInstanceState")
         Log.d("MainAct_Log", savedInstanceState.getString(Constants.ANSWER).toString())
         Log.d("MainAct_Log", savedInstanceState.getString(Constants.KEY).toString())
@@ -183,7 +183,8 @@ class MainActivity : AppCompatActivity() {
                 //Toast.makeText(this@MainActivity, "Вы выбрали шифр: ${arrayStr[position]}", Toast.LENGTH_SHORT).show()
                 when {
                     arrayStr[position] == "Цезаря" -> {
-                        setDefaultText()
+
+                            setDefaultText()
 
                         // для ввода только цифр
                         bindingClass.inputKey.inputType = InputType.TYPE_CLASS_NUMBER
@@ -435,9 +436,25 @@ class MainActivity : AppCompatActivity() {
         bindingClass.pasteKey.visibility = View.GONE
     }
 
-    fun setDefaultText(){
-        bindingClass.encrDecryTV.text = "Ваше Зашифрованное сообшение"
-        bindingClass.TVKey.text = "Ваш ключ от шифра"
+    fun setDefaultText() {
+
+        // Необходимый костыль, чтобы зашифрованное сообщение и ключ от сообщения не затерались при повороте экрана
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE && turned)
+            turned = false
+        else if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE && !turned)
+            turned = true
+        else if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT && !turned)
+            turned = true
+        else if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT && turned)
+            turned = false
+
+        if (turned){
+            bindingClass.encrDecryTV.text = "Ваше Зашифрованное сообшение"
+            bindingClass.TVKey.text = "Ваш ключ от шифра"
+            bindingClass.inputKey.setText("")
+            turned = false
+        }
+
     }
 
     // системная кнопка "Назад"
