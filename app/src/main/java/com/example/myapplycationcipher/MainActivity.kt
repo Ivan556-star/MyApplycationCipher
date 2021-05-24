@@ -28,7 +28,15 @@ object Constants{
 class MainActivity : AppCompatActivity() {
     private lateinit var bindingClass: ActivityMainBinding
     private var backPressedTime: Long = 0
-    private var turned = true
+    private var startSpinner: Long = 0
+
+    private var countSpiner = 0
+    private var turned = false
+    private var Position = -1
+
+
+    private var saveUnser = ""
+    private var saveKEY = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -142,13 +150,17 @@ class MainActivity : AppCompatActivity() {
         outState.run {
             putString("ANSWER", bindingClass.encrDecryTV.text.toString())
             putString("KEY", bindingClass.TVKey.text.toString())
+
         }
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         bindingClass.encrDecryTV.text = savedInstanceState.getString(Constants.ANSWER)
+        saveUnser = savedInstanceState.getString(Constants.ANSWER).toString()
         bindingClass.TVKey.text = savedInstanceState.getString(Constants.KEY)
+        saveKEY = savedInstanceState.getString(Constants.KEY).toString()
+        //turned = true
     }
     // -----------------------------------------------------------------------------
 
@@ -161,6 +173,12 @@ class MainActivity : AppCompatActivity() {
         bindingClass.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
+                // Необходимый костыль, чтобы зашифрованное сообщение и ключ от сообщения не затерались при повороте экрана
+                countSpiner++
+                Position = position
+                if (countSpiner == 2 && startSpinner + 1000  > System.currentTimeMillis())
+                    turned = true
+                startSpinner = System.currentTimeMillis()
 
                 //чтобы изменить цвет текста в спинере на белый
                 try {
@@ -172,7 +190,6 @@ class MainActivity : AppCompatActivity() {
                 //Toast.makeText(this@MainActivity, "Вы выбрали шифр: ${arrayStr[position]}", Toast.LENGTH_SHORT).show()
                 when {
                     arrayStr[position] == "Цезаря" -> {
-
                             setDefaultText()
 
                         // для ввода только цифр
@@ -207,7 +224,7 @@ class MainActivity : AppCompatActivity() {
                                         Toast.LENGTH_SHORT).show()
 
                         }
-//nhghk
+
                         bindingClass.decryptButton.setOnClickListener {
                             if (checkInTextAndInKey())
                                 try {
@@ -330,7 +347,9 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 }
+                if (bindingClass.encrDecryTV.text.equals("Ваше Зашифрованное сообшение") && turned){
 
+                }
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
@@ -426,22 +445,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setDefaultText() {
+        var erase = true
 
         // Необходимый костыль, чтобы зашифрованное сообщение и ключ от сообщения не затерались при повороте экрана
-        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE && turned)
+        if (countSpiner == 1)
+            erase = false
+        else if (countSpiner == 2 && Position != 0 && turned) {
+            erase = false
             turned = false
-        else if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE && !turned)
-            turned = true
-        else if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT && !turned)
-            turned = true
-        else if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT && turned)
-            turned = false
+        }
 
-        if (turned){
+        if (erase){
             bindingClass.encrDecryTV.text = "Ваше Зашифрованное сообшение"
             bindingClass.TVKey.text = "Ваш ключ от шифра"
             bindingClass.inputKey.setText("")
-            turned = false
         }
 
     }
