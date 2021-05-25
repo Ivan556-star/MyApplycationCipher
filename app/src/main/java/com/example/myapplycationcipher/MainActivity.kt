@@ -190,7 +190,7 @@ class MainActivity : AppCompatActivity() {
                 //Toast.makeText(this@MainActivity, "Вы выбрали шифр: ${arrayStr[position]}", Toast.LENGTH_SHORT).show()
                 when {
                     arrayStr[position] == "Цезаря" -> {
-                            setDefaultText()
+                        setDefaultText()
 
                         // для ввода только цифр
                         bindingClass.inputKey.inputType = InputType.TYPE_CLASS_NUMBER
