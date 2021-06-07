@@ -81,37 +81,4 @@ public class Vijenera implements shifr {
         return new String[]{unswer, KEY};
     }
 
-    public static void main(String[] args) {
-        Vijenera cypher = new Vijenera();
-        int choiceShifr;
-        while (true)
-            try {
-                System.out.print("Зашифровать(1)/расшифровать(0): ");
-                String choiceShifrIn = cin.nextLine();
-                choiceShifr = Integer.parseInt(choiceShifrIn);
-                if (choiceShifr < 0 || choiceShifr > 1) {
-                    System.out.println("Ошибка, введите 1 или 0");
-                    continue;
-                }
-                break;
-            } catch (Exception e) {
-                System.out.println("Ошибка, введите 1 или 0");
-            }
-
-        String KEY;
-        System.out.print("Введите ключ: ");
-        KEY = cin.nextLine();
-        System.out.println("Введите текст");
-        String text = cin.nextLine();
-        String[] unswer = cypher.crypt(choiceShifr, text, KEY);
-        if (choiceShifr == 1)
-            System.out.println("Зашифрованный текст\n" +  unswer[0] +
-                    "\nКлюч от шифра\n" + unswer[1]);
-        else
-            System.out.println("Расшированный текст\n" +  unswer[0] +
-                    "\nКлюч от шифра\n" + unswer[1]);
-
-    }
-
-
 }

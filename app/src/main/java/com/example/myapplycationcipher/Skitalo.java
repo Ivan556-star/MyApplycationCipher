@@ -39,30 +39,4 @@ public class Skitalo implements shifr {
         return new String[]{unswer, KEY};
     }
 
-    public static void main(String[] args) {
-        Skitalo cypher = new Skitalo();
-        int choiceShifr;
-        while (true)
-            try {
-                System.out.print("Зашифровать(1)/расшифровать(0): ");
-                String choiceShifrIn = cin.nextLine();
-                choiceShifr = Integer.parseInt(choiceShifrIn);
-                if (choiceShifr < 0 || choiceShifr > 1) {
-                    System.out.println("Ошибка, введите 1 или 0");
-                    continue;
-                }
-                break;
-            } catch (Exception e) {
-                System.out.println("Ошибка, введите 1 или 0");
-            }
-
-        System.out.println("Введите текст");
-        String text = cin.nextLine();
-        String[] unswer = cypher.crypt(choiceShifr, text, "");
-        if (choiceShifr == 1)
-            System.out.println("Зашифрованный текст\n" +  unswer[0]);
-        else
-            System.out.println("Расшированный текст\n" +  unswer[0]);
-//wad
-    }
 }

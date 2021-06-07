@@ -4,21 +4,20 @@ import java.util.Random;
 import java.util.Scanner;
 
 public interface shifr {
-    Scanner cin = new Scanner(System.in);
     Random r = new Random();
 
     String[] crypt(int choiceShifr, String text, String KEY);
 
     default String RU(){
-        return "АЙКШДЛТЗЁЮЭЖЯБСХУВМОЕНЬЫФЩПГИЧЪЦР";
+        return "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
     }
 
     default String EN(){
-        return "QOUWIKCMRDBTVAGHJEXNFLYPZS";
+        return "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     }
 
     default String SIM(){
-        return "^№(3;${16<[=:9@?»/*),%'~.84\\\"!>+|&#50}]-«\\_27";
+        return "!\"#$%&'()*+,-./0123456789:;<=>?@[\\\\]^_{|}~«»№";
     }
 
     default String MyCopy(int start, int finish, String str){
