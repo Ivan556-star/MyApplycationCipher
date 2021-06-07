@@ -123,7 +123,7 @@ class MainActivity : AppCompatActivity() {
     // ---------------------------------------------------------------------------
 
     // функция всплывающего окна при наэатии на more
-    fun popUpMenu(){
+    private fun popUpMenu(){
         bindingClass.More.setOnClickListener {
             val popMenu = PopupMenu(this, bindingClass.More)
             popMenu.menuInflater.inflate(R.menu.popup_menu, popMenu.menu)
@@ -132,6 +132,10 @@ class MainActivity : AppCompatActivity() {
                     when (item!!.itemId) {
                         R.id.cyphers -> {
                             val intent = Intent(this@MainActivity, AboutCyphers::class.java)
+                            startActivity(intent)
+                        }
+                        R.id.hack -> {
+                            val intent = Intent(this@MainActivity, Hack::class.java)
                             startActivity(intent)
                         }
                     }
@@ -433,18 +437,18 @@ class MainActivity : AppCompatActivity() {
 
 
     // делаем поля кликабельными и выдимыми
-    fun VISIBLE(){
+    private fun VISIBLE(){
         bindingClass.inputKey.visibility = View.VISIBLE
         bindingClass.pasteKey.visibility = View.VISIBLE
     }
 
     // делаем поля не кликабельными и не выдимыми
-    fun INVISIBLE(){
+    private fun INVISIBLE(){
         bindingClass.inputKey.visibility = View.GONE
         bindingClass.pasteKey.visibility = View.GONE
     }
 
-    fun setDefaultText() {
+    private fun setDefaultText() {
         var erase = true
 
         // Необходимый костыль, чтобы зашифрованное сообщение и ключ от сообщения не затерались при повороте экрана

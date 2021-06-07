@@ -1,22 +1,29 @@
 package com.example.myapplycationcipher;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class AtBash implements shifr{
 
     @Override
     public String[] crypt(int choiceShifr, String text, String KEY) {
         String unswer = "";
-        text = text.toUpperCase().replace(" ", "_");
-
         if (choiceShifr == 1){
             int indexTMP;
             for (char i : text.toCharArray()) {
-                if (RU().contains(String.valueOf(i))) {
-                    indexTMP = RU().indexOf(i);
-                    unswer += RU().charAt(RU().length() - indexTMP - 1);
+                if (RU().contains(String.valueOf(i).toUpperCase())) {
+                    indexTMP = RU().indexOf(String.valueOf(i).toUpperCase());
+                    if (Character.isUpperCase(i))
+                        unswer += RU().charAt(RU().length() - indexTMP - 1);
+                    else
+                        unswer += String.valueOf(RU().charAt(RU().length() - indexTMP - 1)).toLowerCase();
                 }
-                else if (EN().contains(String.valueOf(i))) {
-                    indexTMP = EN().indexOf(i);
-                    unswer += EN().charAt(EN().length() - indexTMP - 1);
+                else if (EN().contains(String.valueOf(i).toUpperCase())) {
+                    indexTMP = EN().indexOf(String.valueOf(i).toUpperCase());
+                    if (Character.isUpperCase(i))
+                        unswer += EN().charAt(EN().length() - indexTMP - 1);
+                    else
+                        unswer += String.valueOf(EN().charAt(EN().length() - indexTMP - 1)).toLowerCase();
                 }
                 else if (SIM().contains(String.valueOf(i))) {
                     indexTMP = SIM().indexOf(i);
@@ -29,13 +36,19 @@ public class AtBash implements shifr{
         else {
             int indexTMP;
             for (char i : text.toCharArray()) {
-                if (RU().contains(String.valueOf(i))) {
-                    indexTMP = RU().indexOf(i);
-                    unswer += RU().charAt(RU().length() - indexTMP - 1);
+                if (RU().contains(String.valueOf(i).toUpperCase())) {
+                    indexTMP = RU().indexOf(String.valueOf(i).toUpperCase());
+                    if (Character.isUpperCase(i))
+                        unswer += RU().charAt(RU().length() - indexTMP - 1);
+                    else
+                        unswer += String.valueOf(RU().charAt(RU().length() - indexTMP - 1)).toLowerCase();
                 }
-                else if (EN().contains(String.valueOf(i))) {
-                    indexTMP = EN().indexOf(i);
-                    unswer += EN().charAt(EN().length() - indexTMP - 1);
+                else if (EN().contains(String.valueOf(i).toUpperCase())) {
+                    indexTMP = EN().indexOf(String.valueOf(i).toUpperCase());
+                    if (Character.isUpperCase(i))
+                        unswer += EN().charAt(EN().length() - indexTMP - 1);
+                    else
+                        unswer += String.valueOf(EN().charAt(EN().length() - indexTMP - 1)).toLowerCase();
                 }
                 else if (SIM().contains(String.valueOf(i))) {
                     indexTMP = SIM().indexOf(i);
@@ -46,6 +59,10 @@ public class AtBash implements shifr{
             }
         }
         return new String[]{unswer};
+    }
+
+    public ArrayList<String> hack(String text, int choiceShifr){
+        return null;
     }
 
 }

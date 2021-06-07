@@ -1,10 +1,12 @@
 package com.example.myapplycationcipher;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Skitalo implements shifr {
     @Override
     public String[] crypt(int choiceShifr, String text, String KEY) {
         String unswer = "";
-        text = text.toUpperCase().replace(" ", "_");
         if (text.length() % 2 != 0) text += ".";
 
         if (choiceShifr == 1){
@@ -37,6 +39,10 @@ public class Skitalo implements shifr {
 
         }
         return new String[]{unswer, KEY};
+    }
+
+    public ArrayList<String> hack(String text, int choiceShifr){
+        return null;
     }
 
 }

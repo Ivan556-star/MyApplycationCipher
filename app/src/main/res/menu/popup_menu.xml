@@ -3,4 +3,7 @@
     <item
         android:id="@+id/cyphers"
         android:title="О шифрах"/>
+    <item
+        android:id="@+id/hack"
+        android:title="Взлом шифров"/>
 </menu>

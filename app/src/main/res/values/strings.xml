@@ -76,4 +76,15 @@
         <item>Спарты</item>
         <item>Виженера</item>
     </string-array>
+
+    <string-array name="ChoiceHack">
+        <item>Цезаря</item>
+    </string-array>
+
+    <string-array name="Alphabet">
+        <item>Русский</item>
+        <item>Английский</item>
+        <item>Оба</item>
+    </string-array>
+
 </resources>
