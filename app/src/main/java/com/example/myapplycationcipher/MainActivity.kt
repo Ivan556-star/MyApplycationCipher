@@ -288,16 +288,29 @@ class MainActivity : AppCompatActivity() {
                     }
                     arrayStr[position] == "Спарты" -> {
                         setDefaultText()
-
-                        INVISIBLE()
+                        // для ввода только цифр
+                        bindingClass.inputKey.inputType = InputType.TYPE_CLASS_NUMBER
+                        VISIBLE()
 
                         bindingClass.encryptButton.setOnClickListener {
                             if (checkInText()){
-                                val cypher = Skitalo().crypt(1,
-                                        bindingClass.inputText.text.toString(),
-                                        bindingClass.inputKey.text.toString())
-                                bindingClass.encrDecryTV.text = cypher[0]
-                                bindingClass.TVKey.text = cypher[0]
+                                try {
+                                    if (bindingClass.inputKey.text.toString().isDigitsOnly() && bindingClass.inputKey.text.toString().toInt() > 0) {
+                                        val cypher = Skitalo().crypt(1,
+                                            bindingClass.inputText.text.toString(),
+                                            bindingClass.inputKey.text.toString())
+                                        bindingClass.encrDecryTV.text = cypher[0]
+                                        bindingClass.TVKey.text = cypher[1]
+                                    }
+                                    else
+                                        Toast.makeText(this@MainActivity,
+                                            "Ошибка, ключ должен быть целым положительным числом",
+                                            Toast.LENGTH_SHORT).show()
+                                } catch (e: Exception){
+                                    Toast.makeText(this@MainActivity,
+                                        "Ошибка, ключ должен быть целым положительным числом",
+                                        Toast.LENGTH_SHORT).show()
+                                }
                             }
                             else
                                 Toast.makeText(this@MainActivity, "Ошибка, поле не может быть пустыми", Toast.LENGTH_SHORT).show()
@@ -306,11 +319,23 @@ class MainActivity : AppCompatActivity() {
 
                         bindingClass.decryptButton.setOnClickListener {
                             if (checkInText()){
-                                val cypher = Skitalo().crypt(0,
-                                        bindingClass.inputText.text.toString(),
-                                        bindingClass.inputKey.text.toString())
-                                bindingClass.encrDecryTV.text = cypher[0]
-                                bindingClass.TVKey.text = cypher[0]
+                                try {
+                                    if (bindingClass.inputKey.text.toString().isDigitsOnly() && bindingClass.inputKey.text.toString().toInt() > 0) {
+                                        val cypher = Skitalo().crypt(0,
+                                            bindingClass.inputText.text.toString(),
+                                            bindingClass.inputKey.text.toString())
+                                        bindingClass.encrDecryTV.text = cypher[0]
+                                        bindingClass.TVKey.text = cypher[1]
+                                    }
+                                    else
+                                        Toast.makeText(this@MainActivity,
+                                            "Ошибка, ключ должен быть целым положительным числом",
+                                            Toast.LENGTH_SHORT).show()
+                                } catch (e: Exception){
+                                    Toast.makeText(this@MainActivity,
+                                        "Ошибка, ключ должен быть целым положительным числом",
+                                        Toast.LENGTH_SHORT).show()
+                                }
                             }
                             else
                                 Toast.makeText(this@MainActivity, "Ошибка, поле не может быть пустыми", Toast.LENGTH_SHORT).show()

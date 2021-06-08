@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@drawable/treugolniki_geometricheskij_mozaika_124638_2160x3840"
+    android:hapticFeedbackEnabled="false"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:id="@+id/encrDecryTVHack"
+        android:layout_width="220dp"
+        android:layout_height="300dp"
+        android:gravity="center|fill_horizontal"
+        android:hint="Расшифрованные варианты"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textIsSelectable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.762" />
+
+    <Button
+        android:id="@+id/ButtonHack"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="?attr/colorControlHighlight"
+        android:ellipsize="none"
+        android:text="hack"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.952" />
+
+    <EditText
+        android:id="@+id/inputTextHack"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Введите текст"
+        android:inputType="textPersonName"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.469"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.402" />
+
+    <ImageButton
+        android:id="@+id/pasteTextHack"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:backgroundTint="@color/material_on_background_disabled"
+        android:onClick="onClickPasteTextHack"
+        android:src="?attr/actionModePasteDrawable"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.956"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.402" />
+
+    <ImageButton
+        android:id="@+id/copyTextHack"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:backgroundTint="@color/material_on_background_disabled"
+        android:onClick="onClickCopyTextHack"
+        android:src="?attr/actionModeCopyDrawable"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.043"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.402" />
+
+    <Spinner
+        android:id="@+id/spinnerHack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:entries="@array/ChoiceHack"
+        android:gravity="center_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.062" />
+
+    <TextView
+        android:id="@+id/hackTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Виды шифров:"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerHack"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.062" />
+
+    <CheckBox
+        android:id="@+id/checkBoxRU"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Русский"
+        android:textColor="#FFFDFD"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.23"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.279" />
+
+    <CheckBox
+        android:id="@+id/checkBoxEN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Английский"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.797"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.279" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="173dp"
+        android:layout_marginTop="167dp"
+        android:layout_marginEnd="182dp"
+        android:layout_marginBottom="37dp"
+        android:text="Выберите алфавит"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/checkBoxEN"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/material_on_background_disabled"
+        android:onClick="onClickClearHack"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.011"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.65"
+        app:srcCompat="@android:drawable/ic_menu_delete" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

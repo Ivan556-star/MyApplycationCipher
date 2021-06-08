@@ -12,6 +12,7 @@
 
     <string-array name="ChoiceHack">
         <item>Цезаря</item>
+        <item>Спарты</item>
     </string-array>
 
     <string-array name="Alphabet">
