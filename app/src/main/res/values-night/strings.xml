@@ -4,10 +4,10 @@
     <string name="decrypt">Decrypt</string>
 
     <string-array name="namesCyphers">
+        <item>Виженера</item>
         <item>Цезаря</item>
         <item>Атбаш</item>
         <item>Спарты</item>
-        <item>Виженера</item>
     </string-array>
 
     <string-array name="ChoiceHack">
