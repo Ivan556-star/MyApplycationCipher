@@ -1,9 +1,6 @@
 package com.example.myapplycationcipher;
 
-import android.renderscript.Script;
-
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Vijenera implements shifr {
 
