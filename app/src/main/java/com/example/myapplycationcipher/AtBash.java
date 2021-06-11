@@ -30,7 +30,7 @@ public class AtBash implements shifr{
                     unswer += SIM().charAt(SIM().length() - indexTMP - 1);
                 }
                 else
-                    System.out.println("Ошибка Атбаш 1");
+                    unswer += i;
             }
         }
         else {
@@ -55,7 +55,7 @@ public class AtBash implements shifr{
                     unswer += SIM().charAt(SIM().length() - indexTMP - 1);
                 }
                 else
-                    System.out.println("Ошибка Атбаш 0");
+                    unswer += i;
             }
         }
         return new String[]{unswer};

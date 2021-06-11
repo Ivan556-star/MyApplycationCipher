@@ -1,5 +1,7 @@
 package com.example.myapplycationcipher;
 
+import android.renderscript.Script;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,15 +16,13 @@ public class Vijenera implements shifr {
             int k = 0;
             while (KEY.length() < text.length()){
                 final String s = String.valueOf(text.charAt(k)).toUpperCase();
-                if (RU().contains(s)){
+                if (RU().contains(s))
                     KEY += RU().charAt(r.nextInt(RU().length()));
-                }
-                if (EN().contains(s)){
+                else if (EN().contains(s))
                     KEY += EN().charAt(r.nextInt(EN().length()));
-                }
-                if (SIM().contains(String.valueOf(text.charAt(k)))){
+                else if (SIM().contains(String.valueOf(text.charAt(k))))
                     KEY += SIM().charAt(r.nextInt(SIM().length()));
-                }
+                else KEY += text.charAt(k);
                 k++;
             }
 
@@ -57,7 +57,7 @@ public class Vijenera implements shifr {
                     unswer += SIM().charAt(Math.abs((indexTMP + indexKEY) % SIM().length()));
                 }
                 else
-                    System.out.println("Error VIjener");
+                    unswer += text.charAt(i);
             }
         }
 
@@ -101,7 +101,7 @@ public class Vijenera implements shifr {
                         unswer += SIM().charAt((indexTMP + SIM().length() - indexKEY) % SIM().length());
                     }
                     else
-                        System.out.println("Ошибка, вы ввели символ, которого нет в стандартной клавиатуре");
+                        unswer += text.charAt(i);
                 }
             }catch (IndexOutOfBoundsException e){
                 return new String[]{"Ошибка, вы указали неверный ключ!", KEY};

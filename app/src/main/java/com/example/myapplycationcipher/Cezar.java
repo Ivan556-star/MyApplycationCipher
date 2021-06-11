@@ -30,7 +30,7 @@ public class Cezar implements shifr {
                     pos = SIM().indexOf(String.valueOf(i));
                     unswer += SIM().charAt(Math.abs(pos + shifrKey) % SIM().length());
                 } else
-                    System.out.println("Error Cypher Cezar");
+                    unswer += i;
             }
         } else {
             for (char i : arrText)
@@ -64,7 +64,7 @@ public class Cezar implements shifr {
                         pos = SIM().length() + pos;
                     unswer += SIM().charAt(pos % SIM().length());
                 } else
-                    System.out.println("Error DeCypher Cezar");
+                    unswer += i;
         }
         return new String[]{unswer, KEY};
     }
