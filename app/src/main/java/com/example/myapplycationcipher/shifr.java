@@ -18,7 +18,7 @@ public interface shifr {
     }
 
     default String SIM(){
-        return " !\"#$%&'()*+,-./0123456789:;<=>?@[\\]^_{|}~«»№\n";
+        return " !\"#$%&'()*+,-./0123456789:;<=>?@[\\]^_{|}~«»№";
     }
 
     default String MyCopy(int start, int finish, String str){
